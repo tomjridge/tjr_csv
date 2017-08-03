@@ -9,6 +9,6 @@ test: FORCE
 	ocamlfind ocamlopt -package p0,tjr_csv -linkpkg -o test test.ml
 
 clean:
-		rm -f *.{cmi,cmo,cmx,o,a,cmxa,cma}
+		rm -f *.{cmi,cmo,cmx,o,a,cmxa,cma} test a.out
 
 FORCE:

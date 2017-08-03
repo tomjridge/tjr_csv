@@ -4,7 +4,7 @@
 open Yojson.Safe
 
 let (insep,outsep) = 
-  if (Array.length Sys.argv > 2) then
+  if (Array.length Sys.argv >= 2) then
     let arg = Sys.argv.(1) in
     arg 
     |> Yojson.Safe.from_string 
@@ -46,6 +46,7 @@ let quote s =
   |> List.map (String.make 1)
   |> List.map (fun s -> if s=dq then dq^dq else s)
   |> Tjr_string.concat_strings ~sep:""
+  |> fun s -> dq^s^dq
 
 (* FIXME may get an extra empty line? *)
 let main () = 
@@ -57,7 +58,7 @@ let main () =
       row
       |> List.map (fun f ->
         dest_field f |> fun s -> if needs_quote s then quote s else s)
-      |> Tjr_string.concat_strings ~sep:comma
+      |> Tjr_string.concat_strings ~sep:outsep
       |> print_endline)[@@warning "-8"]
 
 let _ = main ()
