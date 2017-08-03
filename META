@@ -1,0 +1,6 @@
+name="tjr_csv"
+description="OCaml CSV parser"
+version="??"
+requires="str,p0"
+archive(byte)="tjr_csv.cma"
+archive(native)="tjr_csv.cmxa"
