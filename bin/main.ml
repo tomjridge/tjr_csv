@@ -19,13 +19,16 @@ let insep_char,outsep_char =
 
 open Tjr_csv
 
-(* https://rosettacode.org/wiki/Read_entire_file#OCaml *)
-
-(* this doesn't work currently - need to read whole of stdin *)
-let load_file ic =
-  let n = in_channel_length ic in
-  let s = String.create n in
-  really_input ic s 0 n;
+let read_stream ic =
+  1024 |> fun len ->
+  let buf = Bytes.create len in
+  let rec f sofar last_nread = 
+    if last_nread = 0 then sofar else
+      input ic buf 0 len |> fun nread ->
+      let sofar=sofar^(Bytes.sub_string buf 0 nread) in
+      f sofar nread
+  in
+  f "" (-99) |> fun s ->
   close_in ic;
   s[@@warning "-3"]
 
@@ -44,8 +47,9 @@ let quote s =
   |> List.map (fun s -> if s=dq then dq^dq else s)
   |> Tjr_string.concat_strings ~sep:""
 
+(* FIXME may get an extra empty line? *)
 let main () = 
-  load_file Pervasives.stdin |> fun s ->
+  read_stream Pervasives.stdin |> fun s ->
   rows s |> function Some(rows,_) ->
   rows |> 
   List.iter (fun row ->
