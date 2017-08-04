@@ -7,6 +7,10 @@ a.out: FORCE
 
 test: FORCE
 	ocamlfind ocamlopt -package p0,tjr_csv -linkpkg -o test test.ml
+	./test
+
+test2: FORCE
+	cat test.csv | ./tjr_csv.sh --outsep \|
 
 clean:
 		rm -f *.{cmi,cmo,cmx,o,a,cmxa,cma} test a.out

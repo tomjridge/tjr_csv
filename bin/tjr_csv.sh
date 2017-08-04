@@ -3,7 +3,7 @@
 import argparse
 import json
 
-parser = argparse.ArgumentParser(description='Parse csv.')
+parser = argparse.ArgumentParser(description='Parse CSV from stdin and output to stdout, optionally changing the separator.')
 parser.add_argument('--sep', type=str, help='separator for input fields',default=',')
 parser.add_argument('--outsep', type=str, help='separator for output fields',default='|')
 
