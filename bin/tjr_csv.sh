@@ -16,4 +16,4 @@ s=json.dumps([args.sep,args.outsep])
 # now execute the a.out program with the json string as first argument
 import subprocess
 
-subprocess.call(["./a.out",s])
+subprocess.call(["./tjr_csv.native",s])
