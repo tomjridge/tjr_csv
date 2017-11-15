@@ -15,7 +15,7 @@ test2: FORCE
 	cat test.csv | ./tjr_csv.sh --outsep \|
 
 install:
-	cp tjr_csv.{sh,native} /tmp
+	cp tjr_csv.{sh,native} /tmp/l/bin
 
 clean:
 		rm -f *.{cmi,cmo,cmx,o,a,cmxa,cma} test $(NATIVE)
